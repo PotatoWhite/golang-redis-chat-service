@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+  chat-service:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    environment:
+      - APP_REDIS_ADDR=redis:6379
